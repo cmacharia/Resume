@@ -49,7 +49,7 @@ if (passwordForm) {
     e.preventDefault();
     const password = passwordInput.value;
     
-    if (password === 'FrontEndWork') {
+    if (password === 'beautifulpixels') {
       passwordGate.style.display = 'none';
       workContent.classList.add('visible');
     } else {
