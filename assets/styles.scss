@@ -11,6 +11,27 @@
   --color-card: #ffffff;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', -apple-system, sans-serif;
+
+  // Animation timing
+  --transition-fast: 0.2s;
+  --transition-medium: 0.3s;
+  --transition-slow: 0.5s;
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ===========================================
+   Reduced Motion Support
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 * {
@@ -51,6 +72,20 @@ header {
     justify-content: space-between;
     align-items: center;
   }
+
+  // Staggered fade-in animation on page load
+  .logo,
+  nav a {
+    opacity: 0;
+    animation: fadeIn 0.5s var(--ease-out-cubic) forwards;
+  }
+
+  .logo { animation-delay: 0.05s; }
+  nav a:nth-child(1) { animation-delay: 0.1s; }
+  nav a:nth-child(2) { animation-delay: 0.15s; }
+  nav a:nth-child(3) { animation-delay: 0.2s; }
+  nav a:nth-child(4) { animation-delay: 0.25s; }
+  nav a:nth-child(5) { animation-delay: 0.3s; }
 }
 
 .logo {
@@ -59,6 +94,11 @@ header {
   font-weight: 500;
   color: var(--color-text);
   text-decoration: none;
+  transition: transform var(--transition-fast) var(--ease-out-cubic);
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 nav {
@@ -67,11 +107,38 @@ nav {
     text-decoration: none;
     font-size: 0.95rem;
     margin-left: 32px;
-    transition: color 0.2s ease;
+    position: relative;
+    transition: color var(--transition-fast) ease;
 
-    &:hover,
+    // Animated underline
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--transition-medium) var(--ease-out-cubic);
+    }
+
+    &:hover {
+      color: var(--color-text);
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
     &.active {
       color: var(--color-text);
+
+      &::after {
+        transform: scaleX(1);
+      }
     }
   }
 }
@@ -126,7 +193,7 @@ footer {
 }
 
 /* ===========================================
-   Animation
+   Animation Keyframes
    =========================================== */
 
 @keyframes fadeUp {
@@ -137,6 +204,85 @@ footer {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   Scroll Animation Classes
+   =========================================== */
+
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.fade-up {
+  transform: translateY(30px);
+}
+
+.animate-on-scroll.fade-up.is-visible {
+  animation: fadeUp var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-on-scroll.fade-left {
+  transform: translateX(-30px);
+}
+
+.animate-on-scroll.fade-left.is-visible {
+  animation: fadeInLeft var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+.animate-on-scroll.fade-in.is-visible {
+  animation: fadeIn var(--transition-slow) var(--ease-out-cubic) forwards;
+}
+
+// Stagger delay classes
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ===========================================
+   Page Transitions
+   =========================================== */
+
+body {
+  &.page-transitioning {
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+  }
+
+  &.page-entering {
+    animation: fadeIn 0.4s ease-out forwards;
   }
 }
 
@@ -197,6 +343,21 @@ h1 {
 }
 
 .skill-category {
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--color-card);
+  border: 1px solid transparent;
+  transition:
+    transform var(--transition-fast) var(--ease-out-cubic),
+    box-shadow var(--transition-fast) var(--ease-out-cubic),
+    border-color var(--transition-fast) ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-border);
+  }
+
   h3 {
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -226,14 +387,56 @@ h1 {
   grid-template-columns: 180px 1fr;
   gap: 40px;
   padding: 32px 0;
+  padding-left: 24px;
+  margin-left: -24px;
   border-bottom: 1px solid var(--color-border);
+  border-radius: 8px;
+  position: relative;
+  transition: background-color var(--transition-fast) ease;
+
+  // Animated left border indicator
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 32px;
+    bottom: 32px;
+    width: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    opacity: 0;
+    transform: scaleY(0);
+    transition:
+      opacity var(--transition-fast) ease,
+      transform var(--transition-fast) var(--ease-out-cubic);
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.015);
+
+    &::before {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
 
   &:first-of-type {
-    padding-top: 0;
+    padding-top: 24px;
+    margin-top: -24px;
+
+    &::before {
+      top: 24px;
+    }
   }
 
   &:last-of-type {
     border-bottom: none;
+    padding-bottom: 24px;
+    margin-bottom: -24px;
+
+    &::before {
+      bottom: 24px;
+    }
   }
 }
 
@@ -323,10 +526,19 @@ h1 {
     background: var(--color-card);
     color: var(--color-text);
     outline: none;
-    transition: border-color 0.2s ease;
+    transition:
+      border-color var(--transition-fast) ease,
+      box-shadow var(--transition-fast) ease,
+      background-color var(--transition-fast) ease;
+
+    &:hover:not(:focus) {
+      border-color: var(--color-text-muted);
+    }
 
     &:focus {
       border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(41, 37, 36, 0.1);
+      background-color: #fff;
     }
   }
 
@@ -365,6 +577,9 @@ h1 {
 .password-box {
   text-align: center;
   max-width: 400px;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  animation: passwordBoxReveal 0.6s var(--ease-out-cubic) 0.2s forwards;
 
   h1 {
     font-family: var(--font-display);
@@ -376,6 +591,13 @@ h1 {
   p {
     color: var(--color-text-muted);
     margin-bottom: 32px;
+  }
+}
+
+@keyframes passwordBoxReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -436,17 +658,11 @@ h1 {
   &.visible {
     display: block;
 
-    .page-header,
-    .project {
+    .page-header {
       animation: fadeUp 0.5s ease forwards;
       opacity: 0;
+      animation-delay: 0.1s;
     }
-
-    .page-header { animation-delay: 0.1s; }
-    .project:nth-child(2) { animation-delay: 0.2s; }
-    .project:nth-child(3) { animation-delay: 0.3s; }
-    .project:nth-child(4) { animation-delay: 0.4s; }
-    .project:nth-child(5) { animation-delay: 0.5s; }
   }
 }
 
@@ -509,16 +725,34 @@ h1 {
   padding: 8px 16px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  transition: all 0.2s ease;
+  transition:
+    color var(--transition-fast) ease,
+    border-color var(--transition-fast) ease,
+    background-color var(--transition-fast) ease,
+    transform var(--transition-fast) var(--ease-out-cubic),
+    box-shadow var(--transition-fast) ease;
 
   &:hover {
-    color: var(--color-text);
+    color: #fff;
+    background-color: var(--color-accent);
     border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
 
   svg {
     width: 14px;
     height: 14px;
+    transition: transform var(--transition-fast) var(--ease-out-cubic);
+  }
+
+  &:hover svg {
+    transform: translate(2px, -2px);
   }
 }
 
@@ -571,6 +805,14 @@ h1 {
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--color-border);
+
+  img {
+    transition: transform var(--transition-medium) var(--ease-out-cubic);
+  }
+}
+
+.project:hover .screenshot-wrapper img {
+  transform: scale(1.03);
 }
 
 .screenshot-placeholder {
