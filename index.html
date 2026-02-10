@@ -1,187 +1,301 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Christopher Macharia | Frontend Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="dist/styles.css" />
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <a href="index.html" class="logo">CM</a>
-        <nav>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-          <a href="work.html">Work</a>
-          <a href="https://www.linkedin.com/in/christopher-macharia-27818a52" target="_blank" rel="noopener">LinkedIn</a>
-        </nav>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christopher Macharia | Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dist/styles.css">
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <nav>
+    <a href="#" class="nav-logo">CM<span class="cursor-blink"></span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#skills" onclick="closeNav()">skills</a></li>
+      <li><a href="#experience" onclick="closeNav()">experience</a></li>
+      <li><a href="#work" onclick="closeNav()">work</a></li>
+      <li><a href="#contact" onclick="closeNav()">contact</a></li>
+      <li><a href="https://www.linkedin.com/in/christopher-macharia-27818a52" target="_blank" rel="noopener" onclick="closeNav()">LinkedIn</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" onclick="toggleNav()" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-label"><span class="line"></span>Frontend Developer</div>
+        <h1 class="hero-name">Christopher<br><span class="highlight">Macharia</span></h1>
+        <p class="hero-desc">A frontend developer with 12+ years of experience creating polished, accessible web experiences. I work at the intersection of design and engineering—translating creative vision into high-performance, production-ready code.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn-primary">View Selected Work</a>
+          <a href="#contact" class="btn-secondary">Get In Touch</a>
+        </div>
       </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container">
-          <p class="hero-label">Frontend Developer</p>
-          <h1>Christopher Macharia</h1>
-          <p class="hero-intro">
-            A frontend developer with 12+ years of experience creating polished,
-            accessible web experiences. I work at the intersection of design and
-            engineering—translating creative vision into high-performance,
-            production-ready code.
-          </p>
-          <a href="work.html" class="btn">View Selected Work</a>
-        </div>
-      </section>
-
-      <section id="skills">
-        <div class="container">
-          <h2 class="section-title">Skills & Expertise</h2>
-          <div class="skills-grid">
-            <div class="skill-category animate-on-scroll fade-up stagger-1">
-              <h3>Languages</h3>
-              <ul>
-                <li>HTML5</li>
-                <li>CSS3 / SCSS</li>
-                <li>JavaScript</li>
-                <li>TypeScript</li>
-              </ul>
-            </div>
-            <div class="skill-category animate-on-scroll fade-up stagger-2">
-              <h3>Frameworks</h3>
-              <ul>
-                <li>React</li>
-                <li>Episerver</li>
-                <li>Umbraco</li>
-              </ul>
-            </div>
-            <div class="skill-category animate-on-scroll fade-up stagger-3">
-              <h3>Design Tools</h3>
-              <ul>
-                <li>Figma</li>
-                <li>Adobe Creative Suite</li>
-              </ul>
-            </div>
-            <div class="skill-category animate-on-scroll fade-up stagger-4">
-              <h3>Practices</h3>
-              <ul>
-                <li>Design Systems</li>
-                <li>Accessibility (WCAG)</li>
-                <li>Responsive Design</li>
-                <li>Git Version Control</li>
-              </ul>
-            </div>
+      <div class="hero-visual">
+        <div class="float-tag"><span class="dot" style="background:var(--accent)"></span>TypeScript</div>
+        <div class="float-tag"><span class="dot" style="background:var(--blue)"></span>React</div>
+        <div class="float-tag"><span class="dot" style="background:var(--purple)"></span>SCSS</div>
+        <div class="float-tag"><span class="dot" style="background:var(--orange)"></span>A11y</div>
+        <div class="code-window">
+          <div class="code-titlebar">
+            <span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span>
+            <span class="code-titlebar-text">developer.tsx</span>
+          </div>
+          <div class="code-body">
+            <div class="code-line"><span class="line-num">1</span><span class="code-content"><span class="kw">interface</span> <span class="ty">Developer</span> {</span></div>
+            <div class="code-line"><span class="line-num">2</span><span class="code-content">&nbsp;&nbsp;<span class="pr">name</span>: <span class="ty">string</span>;</span></div>
+            <div class="code-line"><span class="line-num">3</span><span class="code-content">&nbsp;&nbsp;<span class="pr">role</span>: <span class="ty">string</span>;</span></div>
+            <div class="code-line"><span class="line-num">4</span><span class="code-content">&nbsp;&nbsp;<span class="pr">stack</span>: <span class="ty">string</span>[];</span></div>
+            <div class="code-line"><span class="line-num">5</span><span class="code-content">&nbsp;&nbsp;<span class="fn">build</span>(): <span class="ty">UIComponent</span>;</span></div>
+            <div class="code-line"><span class="line-num">6</span><span class="code-content">}</span></div>
+            <div class="code-line"><span class="line-num">7</span><span class="code-content"></span></div>
+            <div class="code-line"><span class="line-num">8</span><span class="code-content"><span class="kw">const</span> <span class="pr">chris</span>: <span class="ty">Developer</span> = {</span></div>
+            <div class="code-line"><span class="line-num">9</span><span class="code-content">&nbsp;&nbsp;<span class="pr">name</span>: <span class="str">"Christopher Macharia"</span>,</span></div>
+            <div class="code-line"><span class="line-num">10</span><span class="code-content">&nbsp;&nbsp;<span class="pr">role</span>: <span class="str">"Lead Frontend Dev"</span>,</span></div>
+            <div class="code-line"><span class="line-num">11</span><span class="code-content">&nbsp;&nbsp;<span class="pr">stack</span>: [<span class="str">"TS"</span>, <span class="str">"React"</span>, <span class="str">"SCSS"</span>],</span></div>
+            <div class="code-line"><span class="line-num">12</span><span class="code-content">&nbsp;&nbsp;<span class="fn">build</span>() {</span></div>
+            <div class="code-line"><span class="line-num">13</span><span class="code-content">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="fn">createUI</span>({</span></div>
+            <div class="code-line"><span class="line-num">14</span><span class="code-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pr">accessible</span>: <span class="op">true</span>,</span></div>
+            <div class="code-line"><span class="line-num">15</span><span class="code-content">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="pr">performant</span>: <span class="op">true</span>,</span></div>
+            <div class="code-line"><span class="line-num">16</span><span class="code-content">&nbsp;&nbsp;&nbsp;&nbsp;}); <span class="cm">// built with care</span></span></div>
+            <div class="code-line"><span class="line-num">17</span><span class="code-content">&nbsp;&nbsp;}</span></div>
+            <div class="code-line"><span class="line-num">18</span><span class="code-content">};</span></div>
           </div>
         </div>
-      </section>
-
-      <section id="experience">
-        <div class="container">
-          <h2 class="section-title">Experience</h2>
-
-          <div class="experience-item animate-on-scroll fade-left stagger-1">
-            <div class="experience-date">2018 — Present</div>
-            <div class="experience-content">
-              <h3>Lead Front End Developer</h3>
-              <p class="company">Adage Technologies, Chicago</p>
-              <p>
-                Building semantic, accessible interfaces with HTML5, SCSS, and
-                TypeScript/React. Collaborating with UX/UI designers and backend
-                teams to translate prototypes into working products. Delivering
-                frontend solutions for enterprise clients across healthcare,
-                finance, and the arts.
-              </p>
-            </div>
-          </div>
-
-          <div class="experience-item animate-on-scroll fade-left stagger-2">
-            <div class="experience-date">2015 — 2018</div>
-            <div class="experience-content">
-              <h3>Front End Developer</h3>
-              <p class="company">Association Management Center, Chicago</p>
-              <p>
-                Converted design files into responsive HTML/CSS/JS templates.
-                Worked cross-functionally with designers, developers, and
-                project managers to deliver polished web experiences.
-              </p>
-            </div>
-          </div>
-
-          <div class="experience-item animate-on-scroll fade-left stagger-3">
-            <div class="experience-date">2012 — 2015</div>
-            <div class="experience-content">
-              <h3>Web Designer</h3>
-              <p class="company">Tire Rack, South Bend</p>
-              <p>
-                Design and frontend development for the company's retail website
-                and microsites. Created banner ads, promotions, and HTML email
-                campaigns.
-              </p>
-            </div>
-          </div>
-
-          <div class="experience-item animate-on-scroll fade-left stagger-4">
-            <div class="experience-date">2007 — 2012</div>
-            <div class="experience-content">
-              <h3>BFA, Design and Visual Communications</h3>
-              <p class="company">Andrews University</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <div class="container">
-          <h2 class="section-title animate-on-scroll fade-up">Get in Touch</h2>
-          <div class="contact-content animate-on-scroll fade-up stagger-1">
-            <p class="contact-text">
-              I'm currently exploring new opportunities and would love to hear
-              about roles where I can contribute to meaningful design and
-              engineering work. Let's connect.
-            </p>
-            <div>
-              <form
-                class="contact-form"
-                action="https://formspree.io/f/YOUR_FORM_ID"
-                method="POST"
-                data-contact-form
-              >
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-              </form>
-              <div class="form-success" data-form-success>
-                Thanks for reaching out! I'll get back to you soon.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <p>© 2026 Christopher Macharia. All rights reserved.</p>
       </div>
-    </footer>
+    </div>
+  </section>
 
-    <script src="assets/scripts.js"></script>
-  </body>
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Skills & Expertise</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon">&lt;/&gt;</div>
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span>HTML5</span>
+            <span>CSS3 / SCSS</span>
+            <span>JavaScript</span>
+            <span>TypeScript</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">{ }</div>
+          <h3>Frameworks</h3>
+          <div class="skill-tags">
+            <span>React</span>
+            <span>Episerver</span>
+            <span>Umbraco</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">&#9680;</div>
+          <h3>Design Tools</h3>
+          <div class="skill-tags">
+            <span>Figma</span>
+            <span>Adobe Creative Suite</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon">&#9889;</div>
+          <h3>Practices</h3>
+          <div class="skill-tags">
+            <span>Design Systems</span>
+            <span>Accessibility (WCAG)</span>
+            <span>Responsive Design</span>
+            <span>Git Version Control</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-timeline">
+        <div class="exp-item reveal">
+          <div class="exp-date">2018 — Present</div>
+          <div class="exp-title">Lead Front End Developer</div>
+          <div class="exp-company">Adage Technologies, Chicago</div>
+          <p class="exp-desc">Building semantic, accessible interfaces with HTML5, SCSS, and TypeScript/React. Collaborating with UX/UI designers and backend teams to translate prototypes into working products. Delivering frontend solutions for enterprise clients across healthcare, finance, and the arts.</p>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-date">2015 — 2018</div>
+          <div class="exp-title">Front End Developer</div>
+          <div class="exp-company">Association Management Center, Chicago</div>
+          <p class="exp-desc">Converted design files into responsive HTML/CSS/JS templates. Worked cross-functionally with designers, developers, and project managers to deliver polished web experiences.</p>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-date">2012 — 2015</div>
+          <div class="exp-title">Web Designer</div>
+          <div class="exp-company">Tire Rack, South Bend</div>
+          <p class="exp-desc">Design and frontend development for the company's retail website and microsites. Created banner ads, promotions, and HTML email campaigns.</p>
+        </div>
+        <div class="exp-item reveal">
+          <div class="exp-date">2007 — 2012</div>
+          <div class="exp-title">BFA, Design and Visual Communications</div>
+          <div class="exp-company">Andrews University</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Selected Work</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="work-gate" id="workGate">
+        <div class="work-gate-icon">&#128274;</div>
+        <p>This section is password-protected.<br>Enter the password to view project details.</p>
+        <div class="password-row">
+          <input type="password" id="workPassword" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPassword()">
+          <button onclick="checkPassword()">Unlock</button>
+        </div>
+        <div class="password-error" id="passwordError">Incorrect password. Try again.</div>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Project 1: Crisis Prevention Institute -->
+        <div class="project-card reveal">
+          <span class="project-num">01</span>
+          <div class="project-tag">Education / Training</div>
+          <div class="project-screenshot">
+            <img src="assets/images/CPI_screenshot.png" alt="Crisis Prevention Institute event registration interface">
+          </div>
+          <h3>Crisis Prevention Institute</h3>
+          <div class="project-role">Frontend Developer</div>
+          <p>Contributed to a React application designed to improve the UX for event registration. Responsible for creating and styling reusable design components to accelerate development for the wider team.</p>
+          <div class="project-tech">
+            <span>React</span>
+            <span>Component Library</span>
+          </div>
+          <a href="https://www.crisisprevention.com/event-registration" target="_blank" rel="noopener" class="project-link">Visit live site <span>&rarr;</span></a>
+        </div>
+        <!-- Project 2: Cincinnati Symphony Orchestra -->
+        <div class="project-card reveal">
+          <span class="project-num">02</span>
+          <div class="project-tag">Performing Arts</div>
+          <div class="project-screenshot">
+            <img src="assets/images/CSO_Screenshot.png" alt="Cincinnati Symphony Orchestra website">
+          </div>
+          <h3>Cincinnati Symphony Orchestra</h3>
+          <div class="project-role">Lead Frontend Developer</div>
+          <p>Led all frontend development for the Cincinnati Symphony Orchestra's website—one of the oldest orchestras in the United States. Built the complete frontend architecture including the navigation system and ticketing integration.</p>
+          <div class="project-tech">
+            <span>HTML5</span>
+            <span>SCSS</span>
+            <span>TypeScript</span>
+          </div>
+          <a href="https://www.cincinnatisymphony.org" target="_blank" rel="noopener" class="project-link">Visit live site <span>&rarr;</span></a>
+        </div>
+        <!-- Project 3: American Academy of Pediatrics -->
+        <div class="project-card reveal">
+          <span class="project-num">03</span>
+          <div class="project-tag">Healthcare</div>
+          <div class="project-screenshot">
+            <img src="assets/images/AAP_search_screenshot.png" alt="American Academy of Pediatrics search interface">
+          </div>
+          <h3>American Academy of Pediatrics</h3>
+          <div class="project-role">Frontend Developer</div>
+          <p>Multi-year engagement with the nation's largest pediatric organization (67,000+ members). Developed the new search feature—responsible for styling, theming, and interactive functionality within their React application.</p>
+          <div class="project-tech">
+            <span>React</span>
+            <span>SCSS</span>
+          </div>
+          <a href="https://www.aap.org" target="_blank" rel="noopener" class="project-link">Visit live site <span>&rarr;</span></a>
+        </div>
+        <!-- Project 4: Ellsworth Adhesives -->
+        <div class="project-card reveal">
+          <span class="project-num">04</span>
+          <div class="project-tag">Industrial / E-commerce</div>
+          <div class="project-screenshot">
+            <img src="assets/images/ellsworth_Screenshot.png" alt="Ellsworth Adhesives e-commerce website">
+          </div>
+          <h3>Ellsworth Adhesives</h3>
+          <div class="project-role">Lead Frontend Developer</div>
+          <p>Led all frontend development for this global specialty chemical distributor's e-commerce platform. The site serves customers across multiple industries with an extensive product catalog, technical resources, and ordering capabilities.</p>
+          <div class="project-tech">
+            <span>HTML5</span>
+            <span>CSS</span>
+            <span>TypeScript</span>
+          </div>
+          <a href="https://www.ellsworth.com" target="_blank" rel="noopener" class="project-link">Visit live site <span>&rarr;</span></a>
+        </div>
+        <!-- Project 5: Church Pension Group -->
+        <div class="project-card reveal">
+          <span class="project-num">05</span>
+          <div class="project-tag">Financial Services</div>
+          <div class="project-screenshot">[ Screenshot coming soon ]</div>
+          <h3>Church Pension Group</h3>
+          <div class="project-role">Frontend Developer</div>
+          <p>Multi-year, multi-million dollar engagement spanning both the public website redesign and a comprehensive Employee Resource application. Collaborated with the team to build a reusable component library that accelerated development across the organization.</p>
+          <div class="project-tech">
+            <span>React</span>
+            <span>Component Library</span>
+          </div>
+          <span class="project-link" style="opacity: 0.5;">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-wrapper">
+        <div class="contact-info reveal">
+          <h3>Let's build something <span class="highlight">together</span>.</h3>
+          <p>I'm currently exploring new opportunities and would love to hear about roles where I can contribute to meaningful design and engineering work. Let's connect.</p>
+        </div>
+        <div class="contact-form reveal">
+          <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+          </form>
+          <div class="form-success" id="formSuccess">Thanks for reaching out! I'll get back to you soon.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; 2026 Christopher Macharia. All rights reserved.</span>
+    <span>Built with precision.</span>
+  </footer>
+
+  <script src="assets/scripts.js"></script>
+</body>
 </html>

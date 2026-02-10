@@ -1,0 +1,70 @@
+// ===========================================
+// Experience - Timeline, experience cards
+// ===========================================
+
+.exp-timeline {
+  position: relative;
+  padding-left: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--border), transparent);
+  }
+}
+
+.exp-item {
+  position: relative;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-medium);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -2.45rem;
+    top: 2.5rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg-deep);
+    border: 2px solid var(--accent);
+  }
+
+  &:hover {
+    border-color: rgba(110, 231, 183, 0.15);
+    background: var(--bg-card-hover);
+  }
+}
+
+.exp-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.exp-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.exp-company {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+}
+
+.exp-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}

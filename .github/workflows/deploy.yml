@@ -30,7 +30,7 @@ jobs:
         run: npm install -g sass
 
       - name: Compile SCSS
-        run: sass assets/styles.scss dist/styles.css --style=compressed
+        run: sass assets/scss/main.scss dist/styles.css --style=compressed
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

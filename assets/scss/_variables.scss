@@ -1,0 +1,52 @@
+// ===========================================
+// Variables - Color palette, fonts, spacing
+// ===========================================
+
+:root {
+  // Background colors
+  --bg-deep: #0a0a0f;
+  --bg-card: #111119;
+  --bg-card-hover: #16161f;
+
+  // Accent colors
+  --accent: #6ee7b7;
+  --accent-dim: rgba(110, 231, 183, 0.15);
+  --accent-glow: rgba(110, 231, 183, 0.3);
+
+  // Semantic colors
+  --blue: #7dd3fc;
+  --purple: #c4b5fd;
+  --orange: #fdba74;
+  --pink: #f9a8d4;
+
+  // Text colors
+  --text: #e4e4eb;
+  --text-dim: #7a7a8e;
+  --text-muted: #4a4a5e;
+
+  // Border
+  --border: rgba(255, 255, 255, 0.06);
+
+  // Fonts
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Outfit', sans-serif;
+
+  // Spacing
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+
+  // Border radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  // Transitions
+  --transition-fast: 0.3s;
+  --transition-medium: 0.4s;
+  --transition-slow: 0.6s;
+  --ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+}

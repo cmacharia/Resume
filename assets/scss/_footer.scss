@@ -1,0 +1,19 @@
+// ===========================================
+// Footer
+// ===========================================
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 2.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+}

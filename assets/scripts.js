@@ -6,40 +6,83 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ===========================================
-   Page Transitions
+   Mobile Navigation Toggle
    =========================================== */
 
-if (!prefersReducedMotion) {
-  // Fade in on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    document.body.classList.add('page-entering');
+function toggleNav() {
+  document.getElementById('navHamburger').classList.toggle('open');
+  document.getElementById('navLinks').classList.toggle('open');
+  document.querySelector('nav').classList.toggle('open');
+}
 
-    // Remove class after animation completes
-    setTimeout(() => {
-      document.body.classList.remove('page-entering');
-    }, 400);
-  });
+function closeNav() {
+  document.getElementById('navHamburger').classList.remove('open');
+  document.getElementById('navLinks').classList.remove('open');
+  document.querySelector('nav').classList.remove('open');
+}
 
-  // Fade out when navigating to internal links
-  document.addEventListener('click', (e) => {
-    const link = e.target.closest('a');
+/* ===========================================
+   Password Gate
+   =========================================== */
 
-    if (link &&
-        link.href &&
-        link.href.startsWith(window.location.origin) &&
-        !link.href.includes('#') &&
-        !link.hasAttribute('target') &&
-        !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+function checkPassword() {
+  const input = document.getElementById('workPassword');
+  const error = document.getElementById('passwordError');
 
-      e.preventDefault();
-      const destination = link.href;
+  if (input.value === '2026work') {
+    document.getElementById('workGate').style.display = 'none';
+    document.getElementById('projectsGrid').classList.add('visible');
 
-      document.body.classList.add('page-transitioning');
-
+    // Initialize scroll animations for project cards after unlock
+    if (!prefersReducedMotion) {
       setTimeout(() => {
-        window.location.href = destination;
-      }, 250);
+        const projectCards = document.querySelectorAll('.project-card.reveal');
+        projectCards.forEach(card => observer.observe(card));
+      }, 100);
     }
+  } else {
+    error.style.display = 'block';
+    input.style.borderColor = '#f87171';
+    setTimeout(() => {
+      error.style.display = 'none';
+      input.style.borderColor = '';
+    }, 2500);
+  }
+}
+
+/* ===========================================
+   Contact Form Handler
+   =========================================== */
+
+function handleSubmit(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const button = form.querySelector('.form-submit');
+  const originalText = button.textContent;
+
+  button.textContent = 'Sending...';
+  button.disabled = true;
+
+  // Submit form data to Formspree
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(response => {
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      form.reset();
+    } else {
+      throw new Error('Form submission failed');
+    }
+  })
+  .catch(error => {
+    alert('Oops! There was a problem sending your message. Please try again.');
+    button.textContent = originalText;
+    button.disabled = false;
   });
 }
 
@@ -47,113 +90,20 @@ if (!prefersReducedMotion) {
    Scroll-Triggered Animations
    =========================================== */
 
-if (!prefersReducedMotion) {
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -50px 0px',
-    threshold: 0.1
-  };
-
-  const animationObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    animatedElements.forEach(el => {
-      animationObserver.observe(el);
-    });
-  });
-}
-
-/* ===========================================
-   Contact Form Handler (index.html)
-   =========================================== */
-
-const contactForm = document.querySelector('[data-contact-form]');
-if (contactForm) {
-  contactForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const button = form.querySelector('button');
-    const originalText = button.textContent;
-    
-    button.textContent = 'Sending...';
-    button.disabled = true;
-    
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      
-      if (response.ok) {
-        form.style.display = 'none';
-        document.querySelector('[data-form-success]').classList.add('visible');
-        form.reset();
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (error) {
-      alert('Oops! There was a problem sending your message. Please try again.');
-      button.textContent = originalText;
-      button.disabled = false;
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
   });
-}
+}, { threshold: 0.1 });
 
-// Password Gate Handler (work.html)
-const passwordForm = document.querySelector('[data-password-form]');
-if (passwordForm) {
-  const passwordGate = document.querySelector('[data-password-gate]');
-  const passwordInput = document.querySelector('[data-password-input]');
-  const errorMessage = document.querySelector('[data-error-message]');
-  const workContent = document.querySelector('[data-work-content]');
-
-  passwordForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const password = passwordInput.value;
-
-    if (password === '2026work') {
-      passwordGate.style.display = 'none';
-      workContent.classList.add('visible');
-
-      // Initialize scroll animations for project cards after password unlock
-      if (!prefersReducedMotion) {
-        const projectObserverOptions = {
-          root: null,
-          rootMargin: '0px 0px -50px 0px',
-          threshold: 0.1
-        };
-
-        const projectObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, projectObserverOptions);
-
-        // Small delay to let the page-header animation start first
-        setTimeout(() => {
-          const projects = document.querySelectorAll('.project.animate-on-scroll');
-          projects.forEach(project => {
-            projectObserver.observe(project);
-          });
-        }, 100);
-      }
-    } else {
-      errorMessage.style.display = 'block';
-      passwordInput.value = '';
-      passwordInput.focus();
-    }
-  });
-}
+// Initialize observers on page load
+document.addEventListener('DOMContentLoaded', () => {
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  } else {
+    // If reduced motion is preferred, show all elements immediately
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+});

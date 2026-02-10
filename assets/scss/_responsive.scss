@@ -1,0 +1,102 @@
+// ===========================================
+// Responsive - All media queries
+// ===========================================
+
+// Tablet and below
+@media (max-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// Medium screens
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    display: none;
+  }
+
+  .projects-grid.visible {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+
+    a::before {
+      display: none;
+    }
+  }
+}
+
+// Mobile
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-hamburger {
+    display: flex;
+    position: relative;
+    z-index: 10;
+  }
+
+  nav.open {
+    height: 100vh;
+    align-items: flex-start;
+    background: rgba(10, 10, 15, 0.98);
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    position: absolute;
+    inset: 0;
+
+    &.open {
+      display: flex;
+    }
+
+    a {
+      font-size: 1.2rem;
+    }
+  }
+
+  .hero {
+    padding: 6rem 1.5rem 3rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .password-row {
+    flex-direction: column;
+  }
+
+  .section-header {
+    flex-wrap: wrap;
+  }
+
+  .section-line {
+    display: none;
+  }
+}
